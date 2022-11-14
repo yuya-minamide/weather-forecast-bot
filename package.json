@@ -1,0 +1,25 @@
+{
+  "name": "line-weather-forecast-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuya-minamide/weather-forecast-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuya-minamide/weather-forecast-bot/issues"
+  },
+  "homepage": "https://github.com/yuya-minamide/weather-forecast-bot#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
