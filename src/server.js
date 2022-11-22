@@ -1,28 +1,51 @@
-const express = require("express");
+import * as dotenv from "dotenv";
+import express from "express";
+import getWeatherForecastInfo from "./function/get-weather-info.js";
+import chatPostWithWeatherInfo from "./function/chat-post-with-weather-info.js";
+
+dotenv.config();
+
 const app = express();
-const weatherInformation = require('./api/chat-post-with-weather-info')
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    res.sendStatus(200);
+	res.sendStatus(200);
 });
 
 app.listen(PORT, () => {
-    console.log(`This app listening at http://localhost:${PORT}`)
+	console.log(`This app listening at http://localhost:${PORT}`);
 });
 
-app.post("/webhook", function(req, res) {
+app.post("/webhook", function (req, res) {
+	res.sendStatus(200);
 
-    res.sendStatus(200);
-    
-    if (req.body.events[0].type !== "message") {
-        return;
-    }
-    
-    // Text and type come from here
-    const event = req.body.events[0];
-    weatherInformation.chatPostWithWeatherInfo(event);   
+	// Text and type come from here
+	const event = req.body.events[0];
+
+	// The message property contains a message object which corresponds with the message type
+	if (event.type !== "message") {
+		return;
+	}
+
+	// Reply token, text and type information
+	const replyToken = event.replyToken;
+	const messageType = event.message.type;
+	const messageText = event.message.text;
+
+	// This bot uses only text (Message objects can also have types such as image, stamp, etc.)
+	if (messageType !== "text") {
+		return;
+	}
+
+	// Get the weather forecast for the city name sent from the device
+	const weatherForecastData = getWeatherForecastInfo(messageText);
+
+	weatherForecastData.then((data) => {
+		// Send weather forecast to chat
+		chatPostWithWeatherInfo(replyToken, data, messageText);
+	});
 });
