@@ -49,7 +49,7 @@ const chatPostMessage = function (replyToken, weatherForecastData, messageText) 
 		path: "/v2/bot/message/reply",
 		method: "POST",
 		headers: HEADERS,
-		body: body,
+		body,
 	};
 
 	// Define request
