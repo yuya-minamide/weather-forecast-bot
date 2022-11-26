@@ -12,7 +12,7 @@ const headers = {
 };
 
 // Send four-day weather forecast information to user
-const chatPostWithWeatherInfo = function (replyToken, weatherForecastData, messageText) {
+const chatPostMessage = function (replyToken, weatherForecastData, messageText) {
 	// Set four-day weather forecast information to message array
 	const message = [];
 
@@ -69,4 +69,4 @@ const chatPostWithWeatherInfo = function (replyToken, weatherForecastData, messa
 	request.end();
 };
 
-export default chatPostWithWeatherInfo;
+export default chatPostMessage;

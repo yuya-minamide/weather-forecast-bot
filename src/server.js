@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
-import getWeatherForecastInfo from "./function/get-weather-info.js";
-import chatPostWithWeatherInfo from "./function/chat-post-with-weather-info.js";
+import getWeatherForecastInformation from "./function/getWeatherForecastInformation.js";
+import chatPostMessage from "./function/chatPostMessage.js";
 
 dotenv.config();
 
@@ -42,10 +42,10 @@ app.post("/webhook", function (req, res) {
 	}
 
 	// Get the weather forecast for the city name sent from the device
-	const weatherForecastData = getWeatherForecastInfo(messageText);
+	const weatherForecastData = getWeatherForecastInformation(messageText);
 
 	weatherForecastData.then((data) => {
 		// Send weather forecast to chat
-		chatPostWithWeatherInfo(replyToken, data, messageText);
+		chatPostMessage(replyToken, data, messageText);
 	});
 });
