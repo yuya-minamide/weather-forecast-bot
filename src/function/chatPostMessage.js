@@ -6,7 +6,7 @@ dotenv.config();
 const TOKEN = process.env.LINE_ACCESS_TOKEN;
 
 // Request header
-const headers = {
+const HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `Bearer ${TOKEN}`,
 };
@@ -48,8 +48,8 @@ const chatPostMessage = function (replyToken, weatherForecastData, messageText) 
 		hostname: "api.line.me",
 		path: "/v2/bot/message/reply",
 		method: "POST",
-		headers,
-		body,
+		headers: HEADERS,
+		body: body,
 	};
 
 	// Define request
