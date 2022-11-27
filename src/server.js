@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
-import getWeatherForecastInformation from "./function/getWeatherForecastInformation.js";
-import chatPostMessage from "./function/chatPostMessage.js";
+import { getWeatherForecastInformation } from "./function/getWeatherForecastInformation.js";
+import { chatPostMessage } from "./function/chatPostMessage.js";
 
 dotenv.config();
 
@@ -31,7 +31,6 @@ app.post("/webhook", function (req, res) {
 		return;
 	}
 
-	// Reply token, text and type information
 	const replyToken = event.replyToken;
 	const messageType = event.message.type;
 	const messageText = event.message.text;
