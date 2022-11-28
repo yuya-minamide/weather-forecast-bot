@@ -11,8 +11,13 @@ const HEADERS = {
 };
 
 // Send four-day weather forecast information to user
-function chatPostMessage(replyToken, weatherForecastData, messageText) {
-	const weatherForecastForFourDays = [];
+export function chatPostMessage(replyToken, weatherForecastData, cityName) {
+	const weatherForecastForFourDays = [
+		{
+			type: "text",
+			text: `This is the four-day weather forecast for ${cityName}.`,
+		},
+	];
 
 	//Eight weather data is sent per day from weatherAPI(each data represents data for every three hours)
 	const weatherDataPerDay = 8;
@@ -26,19 +31,12 @@ function chatPostMessage(replyToken, weatherForecastData, messageText) {
 
 		const weatherDescription = weatherForecastData.list[i].weather[0].main;
 
-		const forecastObj = {
+		const weatherForecastForOneDay = {
 			type: "text",
 			text: `${forecastDate}: ${weatherDescription}`,
 		};
-		weatherForecastForFourDays.push(forecastObj);
+		weatherForecastForFourDays.push(weatherForecastForOneDay);
 	}
-
-	// Add initial descriptive text to message
-	const firstMessage = {
-		type: "text",
-		text: `This is the four-day weather forecast for ${messageText}.`,
-	};
-	weatherForecastForFourDays.unshift(firstMessage);
 
 	const body = JSON.stringify({
 		replyToken,
@@ -66,5 +64,3 @@ function chatPostMessage(replyToken, weatherForecastData, messageText) {
 	request.write(body);
 	request.end();
 }
-
-export { chatPostMessage };

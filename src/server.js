@@ -33,7 +33,7 @@ app.post("/webhook", function (req, res) {
 
 	const replyToken = event.replyToken;
 	const messageType = event.message.type;
-	const messageText = event.message.text;
+	const cityName = event.message.text;
 
 	// This bot uses only text (Message objects can also have types such as image, stamp, etc.)
 	if (messageType !== "text") {
@@ -41,10 +41,8 @@ app.post("/webhook", function (req, res) {
 	}
 
 	// Get the weather forecast for the city name sent from the device
-	const weatherForecastData = getWeatherForecastInformation(messageText);
-
-	weatherForecastData.then((data) => {
-		// Send weather forecast to chat
-		chatPostMessage(replyToken, data, messageText);
+	getWeatherForecastInformation(cityName).then((weatherForecastData) => {
+		// Send a four-day weather forecast to chat
+		chatPostMessage(replyToken, weatherForecastData, cityName);
 	});
 });
