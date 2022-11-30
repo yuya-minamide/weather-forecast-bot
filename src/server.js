@@ -24,10 +24,10 @@ app.listen(PORT, () => {
 app.post("/webhook", function (req, res) {
 	res.sendStatus(200);
 
-	// Text and type come from here
+	// Text and type come from here.
 	const Event = req.body.events[0];
 
-	// The message property contains a message object which corresponds with the message type
+	// The message property contains a message object which corresponds with the message type.
 	if (Event.type !== "message") {
 		return;
 	}
@@ -41,11 +41,11 @@ app.post("/webhook", function (req, res) {
 		return;
 	}
 
-	// Get the weather forecast for the city name sent from the device
+	// Get the weather forecast for the city name sent from the device.
 	getWeatherForecastInformation(CityName).then((WeatherForecastData) => {
-		// Create a four-day weather forecast message
+		// Create a four-day weather forecast message.
 		const WeatherForecastForFourDays = createMessage(WeatherForecastData, CityName);
-		// Send a four-day weather forecast to chat
+		// Send a four-day weather forecast to chat.
 		chatPostMessage(WeatherForecastForFourDays, ReplyToken);
 	});
 });

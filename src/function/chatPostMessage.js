@@ -10,7 +10,7 @@ const HEADERS = {
 	Authorization: `Bearer ${TOKEN}`,
 };
 
-// Send four-day weather forecast information to user
+// Send four-day weather forecast information to user.
 export function chatPostMessage(WeatherForecastForFourDays, ReplyToken) {
 	const body = JSON.stringify({
 		replyToken: ReplyToken,
