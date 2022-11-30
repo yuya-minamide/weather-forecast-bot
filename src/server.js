@@ -6,22 +6,22 @@ import { chatPostMessage } from "./function/chatPostMessage.js";
 
 dotenv.config();
 
-const APP = express();
+const app = express();
 const PORT = process.env.PORT || 8080;
 
-APP.use(express.json());
+app.use(express.json());
 
-APP.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-APP.get("/", (req, res) => {
+app.get("/", (req, res) => {
 	res.sendStatus(200);
 });
 
-APP.listen(PORT, () => {
+app.listen(PORT, () => {
 	console.log(`This app listening at http://localhost:${PORT}`);
 });
 
-APP.post("/webhook", function (req, res) {
+app.post("/webhook", function (req, res) {
 	res.sendStatus(200);
 
 	// Text and type come from here

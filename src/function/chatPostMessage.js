@@ -12,7 +12,7 @@ const HEADERS = {
 
 // Send four-day weather forecast information to user
 export function chatPostMessage(WeatherForecastForFourDays, ReplyToken) {
-	const Body = JSON.stringify({
+	const body = JSON.stringify({
 		replyToken: ReplyToken,
 		messages: WeatherForecastForFourDays,
 	});
@@ -22,7 +22,7 @@ export function chatPostMessage(WeatherForecastForFourDays, ReplyToken) {
 		path: "/v2/bot/message/reply",
 		method: "POST",
 		headers: HEADERS,
-		body: Body,
+		body,
 	};
 
 	const Request = https.request(WebhookOptions, (res) => {
