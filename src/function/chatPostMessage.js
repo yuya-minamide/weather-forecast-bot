@@ -35,6 +35,6 @@ export function chatPostMessage(WeatherForecastForFourDays, ReplyToken) {
 		console.error(err);
 	});
 
-	Request.write(Body);
+	Request.write(body);
 	Request.end();
 }
